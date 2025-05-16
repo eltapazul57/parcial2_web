@@ -26,10 +26,27 @@ export class ActividadService {
         return await this.actividadRepository.save(actividad)
     }
 
-    /*async cambiarEstado(id:string, estado:number): Promise<ActividadEntity>{
-        const actividad = await this.actividadRepository.findOne({where: {id}});
-        const 
-    }*/
+    async cambiarEstado(id: string, nuevoEstado: number): Promise<ActividadEntity> {
+        const actividad = await this.actividadRepository.findOne({ where: { id }, relations: ['estudiantes'] });
+        if (!actividad) {
+        throw new Error('Actividad no encontrada');
+        }
+
+        if (nuevoEstado === 1) {
+        const porcentajeInscritos = (actividad.estudiantes.length / actividad.cupoMaximo) * 100;
+            if (porcentajeInscritos < 80) {
+                throw new Error('No se puede cerrar la actividad. Debe tener al menos el 80% del cupo inscrito.');
+            }
+        } else if (nuevoEstado === 2) {
+            if (actividad.estudiantes.length < actividad.cupoMaximo) {
+                throw new Error('No se puede finalizar la actividad. Todavía hay cupos disponibles.');
+            }
+        }
+
+        actividad.estado = nuevoEstado;
+        await this.actividadRepository.save(actividad);
+        return actividad;
+    }
 
     async findActividadesByFecha(fecha: string): Promise <ActividadEntity[]>{
         const actividades = await this.actividadRepository.find({where: {fecha}});

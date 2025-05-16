@@ -9,14 +9,13 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { EstudianteModule } from './estudiante/estudiante.module';
 import { ActividadModule } from './actividad/actividad.module';
 import { ResenaModule } from './resena/resena.module';
-/* 
-AQUI VAN LOS IMPORTS DE LAS ENTIDADES
-
-*/
+import { ResenaEntity } from './resena/resena.entity';
+import { ActividadEntity } from './actividad/actividad.entity';
+import { EstudianteEntity } from './estudiante/estudiante.entity';
 
 
 @Module({
-  imports: [/* Aqui van los import de Entidad Module*/
+  imports: [EstudianteModule, ActividadModule, ResenaModule,
     TypeOrmModule.forRoot({
      type: 'postgres',
      host: 'localhost',
@@ -24,7 +23,7 @@ AQUI VAN LOS IMPORTS DE LAS ENTIDADES
      username: 'postgres',
      password: 'postgres',
      database: 'parcial2',
-     entities: [/* Aqui van las entidades entity */],
+     entities: [ResenaEntity, ActividadEntity, EstudianteEntity],
      dropSchema: true,
      synchronize: true
      

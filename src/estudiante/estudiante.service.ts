@@ -3,12 +3,15 @@ import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { EstudianteEntity } from './estudiante.entity';
-
+import { ActividadEntity } from '../actividad/actividad.entity';
 @Injectable()
 export class EstudianteService {
     constructor(
         @InjectRepository(EstudianteEntity)
         private readonly estudianteRepository: Repository<EstudianteEntity>,
+
+        @InjectRepository(ActividadEntity)
+        private readonly actividadRepository: Repository<ActividadEntity>,
     ) {}
 
     async crearEstudiante(estudiante: EstudianteEntity): Promise <EstudianteEntity>{
@@ -31,7 +34,35 @@ export class EstudianteService {
         return estudiante;
     }
 
-    //FALTA inscribirse a actividad
+    async inscribirseActividad(estudianteId: string, actividadId: string): Promise<EstudianteEntity> {
+        const estudiante = await this.estudianteRepository.findOne({ where: { id: estudianteId }, relations: ['actividades'] });
+        if (!estudiante) {
+            throw new Error('Estudiante no encontrado');
+        }
+
+        const actividad = await this.actividadRepository.findOne({ where: { id: actividadId }, relations: ['estudiantes'] });
+        if (!actividad) {
+            throw new Error('Actividad no encontrada');
+        }
+
+        if (actividad.estado !== 0) {
+            throw new Error('La actividad no está abierta para inscripciones');
+        }
+
+        const yaInscrito = estudiante.actividades.some(act => act.id === actividad.id);
+        if (yaInscrito) {
+            throw new Error('El estudiante ya está inscrito en esta actividad');
+        }
+
+        if (actividad.estudiantes.length >= actividad.cupoMaximo) {
+            throw new Error('No hay cupos disponibles en esta actividad');
+        }
+
+        estudiante.actividades.push(actividad);
+        await this.estudianteRepository.save(estudiante);
+
+        return estudiante;
+    }
 
 
 
