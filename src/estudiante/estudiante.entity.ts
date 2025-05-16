@@ -1,5 +1,7 @@
 /* eslint-disable prettier/prettier */
-import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
+import { ResenaEntity } from 'src/resena/resena.entity';
+import { Column, Entity, ManyToMany, OneToMany, PrimaryGeneratedColumn, JoinTable } from 'typeorm';
+import { ActividadEntity } from 'src/actividad/actividad.entity';
 
 @Entity()
 export class EstudianteEntity {
@@ -22,4 +24,13 @@ export class EstudianteEntity {
     semestre:number;
 
     //RELACIONES
+    @OneToMany(() => ResenaEntity, resena => resena.estudiante)
+    resenas: ResenaEntity[];
+
+    @ManyToMany(() => ActividadEntity, actividad => actividad.estudiantes)
+    @JoinTable()
+    actividades: ActividadEntity[];
+
+
+
 }

@@ -1,6 +1,7 @@
 /* eslint-disable prettier/prettier */
-import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
-
+import { Column, Entity, PrimaryGeneratedColumn, OneToMany, ManyToMany, JoinTable} from 'typeorm';
+import { ResenaEntity } from 'src/resena/resena.entity';
+import { EstudianteEntity } from 'src/estudiante/estudiante.entity';
 @Entity()
 export class ActividadEntity {
     @PrimaryGeneratedColumn('uuid')
@@ -17,4 +18,11 @@ export class ActividadEntity {
 
     @Column({type: 'int'})
     estado: number;
+
+    @OneToMany(() => ResenaEntity, resena => resena.actividad)
+    resenas: ResenaEntity[];
+
+    @ManyToMany(() => EstudianteEntity, estudiante => estudiante.actividades)
+    @JoinTable()
+    estudiantes: EstudianteEntity[];
 }

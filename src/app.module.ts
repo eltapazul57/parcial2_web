@@ -8,6 +8,7 @@ Aqui van los imports de los modulos de las entidades
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { EstudianteModule } from './estudiante/estudiante.module';
 import { ActividadModule } from './actividad/actividad.module';
+import { ResenaModule } from './resena/resena.module';
 /* 
 AQUI VAN LOS IMPORTS DE LAS ENTIDADES
 
@@ -27,7 +28,7 @@ AQUI VAN LOS IMPORTS DE LAS ENTIDADES
      dropSchema: true,
      synchronize: true
      
-   }), EstudianteModule, ActividadModule,
+   }), EstudianteModule, ActividadModule, ResenaModule,
  ],
   
   controllers: [AppController],
