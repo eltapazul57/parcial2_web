@@ -1,7 +1,7 @@
 /* eslint-disable prettier/prettier */
 import { Column, Entity, PrimaryGeneratedColumn, OneToMany, ManyToMany, JoinTable} from 'typeorm';
-import { ResenaEntity } from 'src/resena/resena.entity';
-import { EstudianteEntity } from 'src/estudiante/estudiante.entity';
+import { ResenaEntity } from '../resena/resena.entity';
+import { EstudianteEntity } from '../estudiante/estudiante.entity';
 @Entity()
 export class ActividadEntity {
     @PrimaryGeneratedColumn('uuid')

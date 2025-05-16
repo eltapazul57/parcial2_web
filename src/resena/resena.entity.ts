@@ -1,6 +1,6 @@
 /* eslint-disable prettier/prettier */
-import { EstudianteEntity } from 'src/estudiante/estudiante.entity';
-import { ActividadEntity } from 'src/actividad/actividad.entity';
+import { EstudianteEntity } from '../estudiante/estudiante.entity';
+import { ActividadEntity } from '../actividad/actividad.entity';
 import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
 import { ManyToOne } from 'typeorm';
 
