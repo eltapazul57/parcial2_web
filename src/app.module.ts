@@ -6,6 +6,8 @@ import { AppService } from './app.service';
 Aqui van los imports de los modulos de las entidades
  */
 import { TypeOrmModule } from '@nestjs/typeorm';
+import { EstudianteModule } from './estudiante/estudiante.module';
+import { ActividadModule } from './actividad/actividad.module';
 /* 
 AQUI VAN LOS IMPORTS DE LAS ENTIDADES
 
@@ -25,7 +27,7 @@ AQUI VAN LOS IMPORTS DE LAS ENTIDADES
      dropSchema: true,
      synchronize: true
      
-   }),
+   }), EstudianteModule, ActividadModule,
  ],
   
   controllers: [AppController],
