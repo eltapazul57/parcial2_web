@@ -50,7 +50,7 @@ export class ActividadService {
 
     async findActividadesByFecha(fecha: string): Promise <ActividadEntity[]>{
         const actividades = await this.actividadRepository.find({where: {fecha}});
-        if (!actividades){
+        if (!actividades || actividades.length === 0) {
             throw new Error('No hay actividades con la fecha dada');
         }
         return actividades;
