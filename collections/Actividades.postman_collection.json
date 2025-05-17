@@ -1,0 +1,164 @@
+{
+	"info": {
+		"_postman_id": "3cd19ba2-0ccd-42cf-a38d-d874e69d8618",
+		"name": "Actividades",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "29684470"
+	},
+	"item": [
+		{
+			"name": "Buscar actividades por fecha",
+			"request": {
+				"method": "GET",
+				"header": []
+			},
+			"response": [
+				{
+					"name": "Buscar actividades por fecha",
+					"originalRequest": {
+						"method": "GET",
+						"header": []
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "",
+					"header": [],
+					"cookie": [
+						{
+							"expires": "Invalid Date"
+						}
+					],
+					"body": "[\r\n  {\r\n    \"id\": \"ea5a...uuid\",\r\n    \"titulo\": \"Taller de React Avanzado\",\r\n    \"fecha\": \"2025-05-20\",\r\n    \"cupoMaximo\": 25,\r\n    \"estado\": 0,\r\n    \"resenas\": [],\r\n    \"estudiantes\": []\r\n  }\r\n]"
+				}
+			]
+		},
+		{
+			"name": "Crear actividad",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"titulo\": \"Ceramica nanomolecular\",\r\n  \"fecha\": \"2025-05-20\",\r\n  \"cupoMaximo\": 25,\r\n  \"estado\": 0\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{baseUrl}}/actividad",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"actividad"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Crear actividad",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"titulo\": \"Ceramica nanomolecular\",\r\n  \"fecha\": \"2025-05-20\",\r\n  \"cupoMaximo\": 25,\r\n  \"estado\": 0\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/actividad",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"actividad"
+							]
+						}
+					},
+					"status": "Created",
+					"code": 201,
+					"_postman_previewlanguage": "",
+					"header": [],
+					"cookie": [
+						{
+							"expires": "Invalid Date"
+						}
+					],
+					"body": "{\r\n  \"id\": \"ea5a...uuid\",\r\n  \"titulo\": \"Taller de React Avanzado\",\r\n  \"fecha\": \"2025-05-20\",\r\n  \"cupoMaximo\": 25,\r\n  \"estado\": 0,\r\n  \"resenas\": [],\r\n  \"estudiantes\": []\r\n}"
+				}
+			]
+		},
+		{
+			"name": "Cambiar estado de actividad",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"estado\": 1\r\n}\r\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{baseUrl}}/actividad/{{id}}/estado",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"actividad",
+						"{{id}}",
+						"estado"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Cambiar estado de actividad",
+					"originalRequest": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"estado\": 1\r\n}\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/actividad/{{id}}/estado",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"actividad",
+								"{{id}}",
+								"estado"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "",
+					"header": [],
+					"cookie": [
+						{
+							"expires": "Invalid Date"
+						}
+					],
+					"body": "{\r\n  \"id\": \"ea5a...uuid\",\r\n  \"titulo\": \"Taller de React Avanzado\",\r\n  \"fecha\": \"2025-05-20\",\r\n  \"cupoMaximo\": 25,\r\n  \"estado\": 1,\r\n  \"resenas\": [],\r\n  \"estudiantes\": [ ... ]\r\n}"
+				}
+			]
+		}
+	]
+}

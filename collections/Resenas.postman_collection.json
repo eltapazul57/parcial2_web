@@ -1,0 +1,78 @@
+{
+	"info": {
+		"_postman_id": "e21cd7f2-b1a7-457e-8b9f-0677d8a1eed4",
+		"name": "Resenas",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "29684470"
+	},
+	"item": [
+		{
+			"name": "Crear resena",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"comentario\": \"Excelente actividad, muy útil.\",\r\n  \"calificacion\": 5,\r\n  \"fecha\": \"2025-05-17\"\r\n}\r\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{baseUrl}}/resena/{{estudianteId}}/actividad/{{actividadId}}",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"resena",
+						"{{estudianteId}}",
+						"actividad",
+						"{{actividadId}}"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Crear resena",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"comentario\": \"Excelente actividad, muy útil.\",\r\n  \"calificacion\": 5,\r\n  \"fecha\": \"2025-05-17\"\r\n}\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/resena/{{estudianteId}}/actividad/{{actividadId}}",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"resena",
+								"{{estudianteId}}",
+								"actividad",
+								"{{actividadId}}"
+							]
+						}
+					},
+					"status": "Created",
+					"code": 201,
+					"_postman_previewlanguage": "",
+					"header": [],
+					"cookie": [
+						{
+							"expires": "Invalid Date"
+						}
+					],
+					"body": ""
+				}
+			]
+		}
+	]
+}

@@ -1,0 +1,164 @@
+{
+	"info": {
+		"_postman_id": "49c5d835-ab5d-42be-8f78-f3a4e419bd56",
+		"name": "Estudiantes",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "29684470"
+	},
+	"item": [
+		{
+			"name": "Crear estudiante",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"cedula\": 1234567890,\r\n  \"nombre\": \"Manuel Gomez\",\r\n  \"correo\": \"manuel@correo.com\",\r\n  \"programa\": \"Ingeniería de Sistemas\",\r\n  \"semestre\": 7\r\n}\r\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{baseUrl}}/estudiante",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"estudiante"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Crear estudiante",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"cedula\": 1234567890,\r\n  \"nombre\": \"Manuel Gomez\",\r\n  \"correo\": \"manuel@correo.com\",\r\n  \"programa\": \"Ingeniería de Sistemas\",\r\n  \"semestre\": 7\r\n}\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/estudiante",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"estudiante"
+							]
+						}
+					},
+					"_postman_previewlanguage": "",
+					"header": [],
+					"cookie": [
+						{
+							"expires": "Invalid Date"
+						}
+					],
+					"body": "{\r\n  \"id\": \"3f7e...uuid\",\r\n  \"cedula\": 1234567890,\r\n  \"nombre\": \"María González\",\r\n  \"correo\": \"maria@correo.com\",\r\n  \"programa\": \"Ingeniería de Sistemas\",\r\n  \"semestre\": 7,\r\n  \"actividades\": [],\r\n  \"resenas\": []\r\n}\r\n"
+				}
+			]
+		},
+		{
+			"name": "Buscar estudiante",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{baseUrl}}/estudiante/{{id}}",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"estudiante",
+						"{{id}}"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Buscar estudiante",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/estudiante/{{id}}",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"estudiante",
+								"{{id}}"
+							]
+						}
+					},
+					"_postman_previewlanguage": "",
+					"header": [],
+					"cookie": [
+						{
+							"expires": "Invalid Date"
+						}
+					],
+					"body": "{\r\n  \"id\": \"12345\",\r\n  \"cedula\": 1234567890,\r\n  \"nombre\": \"Manuel Gomez\",\r\n  \"correo\": \"manuel@correo.com\",\r\n  \"programa\": \"Ingeniería de Sistemas\",\r\n  \"semestre\": 7,\r\n  \"actividades\": [],\r\n  \"resenas\": []\r\n}\r\n"
+				}
+			]
+		},
+		{
+			"name": "Inscribir estudiante en actividad",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"url": {
+					"raw": "{{baseUrl}}/estudiante/{{estudianteId}}/inscribirse/{{actividadId}}",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"estudiante",
+						"{{estudianteId}}",
+						"inscribirse",
+						"{{actividadId}}"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Inscribir estudiante en actividad",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/estudiante/{{estudianteId}}/inscribirse/{{actividadId}}",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"estudiante",
+								"{{estudianteId}}",
+								"inscribirse",
+								"{{actividadId}}"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "",
+					"header": [],
+					"cookie": [
+						{
+							"expires": "Invalid Date"
+						}
+					],
+					"body": ""
+				}
+			]
+		}
+	]
+}

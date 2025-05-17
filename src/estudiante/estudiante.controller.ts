@@ -2,7 +2,6 @@
 /* eslint-disable @typescript-eslint/no-unsafe-assignment */
 /* eslint-disable @typescript-eslint/no-unsafe-call */
 
-
 import { Body, Controller, Get, Param, Post } from '@nestjs/common';
 import { plainToInstance } from 'class-transformer';
 import { EstudianteService } from './estudiante.service';
@@ -20,7 +19,7 @@ export class EstudianteController {
     }
 
     @Get(':id')
-    async buscarPorId(@Param('id') id: string) {
+    async findEstudianteById(@Param('id') id: string) {
         return await this.estudianteService.findEstudianteById(id);
     }
 
