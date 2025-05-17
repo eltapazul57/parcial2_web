@@ -1,8 +1,5 @@
 /* eslint-disable prettier/prettier */
-/* eslint-disable @typescript-eslint/no-unsafe-argument */
-/* eslint-disable @typescript-eslint/no-unsafe-member-access */
-/* eslint-disable @typescript-eslint/no-unsafe-call */
-/* eslint-disable @typescript-eslint/no-unsafe-assignment */
+
 import { Test, TestingModule } from '@nestjs/testing';
 import { ResenaService } from './resena.service';
 import { TypeOrmTestingConfig } from '../shared/testing-utils/typeorm-testing-config';
@@ -29,49 +26,76 @@ describe('ResenaService', () => {
     resenaRepository = module.get<Repository<ResenaEntity>>(getRepositoryToken(ResenaEntity));
     actividadRepository = module.get<Repository<ActividadEntity>>(getRepositoryToken(ActividadEntity));
     estudianteRepository = module.get<Repository<EstudianteEntity>>(getRepositoryToken(EstudianteEntity));
-
-    await seedDatabase();
   });
 
   it('should be defined', () => {
     expect(service).toBeDefined();
   });
 
-  const seedDatabase = async () => {
-    await resenaRepository.clear();
-    await estudianteRepository.clear();
-    await actividadRepository.clear();
-
-    
+  it('should create a review when student is enrolled and activity is finalizada', async () => {
     const actividad = await actividadRepository.save({
-      titulo: faker.lorem.sentence(4),
+      titulo: faker.lorem.sentence(),
       fecha: faker.date.past().toISOString(),
-      cupoMaximo: 30,
+      cupoMaximo: 5,
       estado: 2,
-      
+      estudiantes: [] as EstudianteEntity[],
     });
 
-    
     const estudiante = await estudianteRepository.save({
       cedula: parseInt(faker.string.numeric(10)),
       nombre: faker.person.fullName(),
       correo: faker.internet.email(),
       programa: faker.lorem.word(),
       semestre: faker.number.int({ min: 1, max: 10 }),
-      
+      actividades: [actividad]
     });
 
-    //asignar la actividad al estudiante
-    estudiante.actividades = [actividad];
-    await estudianteRepository.save(estudiante);
+    actividad.estudiantes = [estudiante];
+    await actividadRepository.save(actividad);
 
-    
-    await resenaRepository.save({
+    const resena = await resenaRepository.save({
       comentario: faker.lorem.sentences(2),
       calificacion: faker.number.int({ min: 1, max: 5 }),
-      fecha: faker.date.recent().toISOString(),
-      estudiante,
-      actividad,
+      fecha: new Date().toISOString(),
+    }); 
+
+    const result = await service.agregarResena(resena, estudiante.id, actividad.id);
+
+    expect(result).toBeDefined();
+    expect(result.comentario).toEqual(resena.comentario);
+    expect(result.estudiante.id).toEqual(estudiante.id);
+    expect(result.actividad.id).toEqual(actividad.id);
+  });
+
+  it('should throw error if actividad is not finalizada  ', async () => {
+    const actividad = await actividadRepository.save({
+      titulo: faker.lorem.sentence(),
+      fecha: faker.date.past().toISOString(),
+      cupoMaximo: 5,
+      estado: 1,
+      estudiantes: [] as EstudianteEntity[],
     });
-  };
+
+    const estudiante = await estudianteRepository.save({
+      cedula: parseInt(faker.string.numeric(10)),
+      nombre: faker.person.fullName(),
+      correo: faker.internet.email(),
+      programa: faker.lorem.word(),
+      semestre: faker.number.int({ min: 1, max: 10 }),
+      actividades: [actividad]
+    });
+
+    actividad.estudiantes = [estudiante];
+    await actividadRepository.save(actividad);
+
+    const resena = await resenaRepository.save({
+      comentario: faker.lorem.sentences(2),
+      calificacion: faker.number.int({ min: 1, max: 5 }),
+      fecha: new Date().toISOString(),
+    }); 
+
+    await expect(service.agregarResena(resena, estudiante.id, actividad.id)).rejects.toThrow('La actividad no está finalizada para reseñas');
+  });
 });
+
+
