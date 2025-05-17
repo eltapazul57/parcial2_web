@@ -4,6 +4,9 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { EstudianteEntity } from './estudiante.entity';
 import { ActividadEntity } from '../actividad/actividad.entity';
+import { BusinessLogicException } from '../shared/errors/business-errors';
+import { BusinessError } from '../shared/errors/business-errors';
+
 @Injectable()
 export class EstudianteService {
     constructor(
@@ -18,10 +21,10 @@ export class EstudianteService {
         const correo = estudiante.correo;
         const semestresValidos = [1,2,3,4,5,6,7,8,9,10]
         if(!semestresValidos.includes(estudiante.semestre)){
-            throw new Error('Semestre inválido.');
+            throw new BusinessLogicException('Semestre inválido.', BusinessError.BAD_REQUEST);
         }
         if(!(correo.includes('@')&& correo.includes('.com'))){
-            throw new Error('Debe de incluir un correo valido');
+            throw new BusinessLogicException('Debe de incluir un correo valido', BusinessError.BAD_REQUEST);
         }
         return await this.estudianteRepository.save(estudiante);
     }
@@ -29,7 +32,7 @@ export class EstudianteService {
     async findEstudianteById(id: string): Promise<EstudianteEntity>{
         const estudiante = await this.estudianteRepository.findOne({where: { id }});
         if (!estudiante){
-            throw new Error('Estudiante no encontrado')
+            throw new BusinessLogicException('Estudiante no encontrado', BusinessError.NOT_FOUND);
         }
         return estudiante;
     }
@@ -37,25 +40,25 @@ export class EstudianteService {
     async inscribirseActividad(estudianteId: string, actividadId: string): Promise<EstudianteEntity> {
         const estudiante = await this.estudianteRepository.findOne({ where: { id: estudianteId }, relations: ['actividades'] });
         if (!estudiante) {
-            throw new Error('Estudiante no encontrado');
+            throw new BusinessLogicException('Estudiante no encontrado', BusinessError.NOT_FOUND);
         }
 
         const actividad = await this.actividadRepository.findOne({ where: { id: actividadId }, relations: ['estudiantes'] });
         if (!actividad) {
-            throw new Error('Actividad no encontrada');
+            throw new BusinessLogicException('Actividad no encontrada', BusinessError.NOT_FOUND);
         }
 
         if (actividad.estado !== 0) {
-            throw new Error('La actividad no está abierta para inscripciones');
+            throw new BusinessLogicException('La actividad no está abierta para inscripciones', BusinessError.PRECONDITION_FAILED);
         }
 
         const yaInscrito = estudiante.actividades.some(act => act.id === actividad.id);
         if (yaInscrito) {
-            throw new Error('El estudiante ya está inscrito en esta actividad');
+            throw new BusinessLogicException('El estudiante ya está inscrito en esta actividad', BusinessError.PRECONDITION_FAILED);
         }
 
         if (actividad.estudiantes.length >= actividad.cupoMaximo) {
-            throw new Error('No hay cupos disponibles en esta actividad');
+            throw new BusinessLogicException('No hay cupos disponibles en esta actividad', BusinessError.PRECONDITION_FAILED);
         }
 
         estudiante.actividades.push(actividad);

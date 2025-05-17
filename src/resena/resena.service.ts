@@ -6,7 +6,8 @@ import { Repository } from 'typeorm';
 import { ResenaEntity } from './resena.entity';
 import { ActividadEntity } from '../actividad/actividad.entity';
 import { EstudianteEntity } from '../estudiante/estudiante.entity';
-
+import { BusinessLogicException } from '../shared/errors/business-errors';
+import { BusinessError } from '../shared/errors/business-errors';
 
 @Injectable()
 export class ResenaService {
@@ -25,21 +26,21 @@ export class ResenaService {
 
             const estudiante = await this.estudianteRepository.findOne({where: { id: estudianteId }, relations: ['actividades'] });
             if (!estudiante) {
-                throw new Error('Estudiante no encontrado');
+                throw new BusinessLogicException('Estudiante no encontrado', BusinessError.NOT_FOUND);
             }
 
             const actividad = await this.actividadRepository.findOne({where: { id: actividadId }, relations: ['estudiantes'] });
             if (!actividad) {
-                throw new Error('Actividad no encontrada');
+                throw new BusinessLogicException('Actividad no encontrada', BusinessError.NOT_FOUND);
             }
 
             if (actividad.estado !== 2) {
-                throw new Error('La actividad no está finalizada para reseñas');
+                throw new BusinessLogicException('La actividad no está finalizada para reseñas', BusinessError.PRECONDITION_FAILED);
             }
             
             const estaInscrito = estudiante.actividades.some(act => act.id === actividad.id);
             if (!estaInscrito) {
-                throw new Error('El estudiante no está inscrito en esta actividad');
+                throw new BusinessLogicException('El estudiante no está inscrito en esta actividad', BusinessError.PRECONDITION_FAILED);
             }
 
             resena.estudiante = estudiante;

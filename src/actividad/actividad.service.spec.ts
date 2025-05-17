@@ -9,6 +9,8 @@ import { ActividadEntity } from './actividad.entity';
 import { faker } from '@faker-js/faker';;
 import { EstudianteEntity } from '../estudiante/estudiante.entity';
 
+
+
 describe('ActividadService', () => {
   let service: ActividadService;
   let actividadRepository: Repository<ActividadEntity>;
@@ -85,7 +87,7 @@ describe('ActividadService', () => {
       resenas: [],
     };
 
-    await expect(service.crearActividad(actividad)).rejects.toThrowError('El titulo debe de tener más de 15 caracteres');
+    await expect(service.crearActividad(actividad)).rejects.toHaveProperty("message", 'El titulo debe de tener más de 15 caracteres');
   });
 
   it('should throw an error if the estado is not 0', async () => {
@@ -99,7 +101,7 @@ describe('ActividadService', () => {
       resenas: [],
     };
 
-    await expect(service.crearActividad(actividad)).rejects.toThrowError('La actividad debe de estar abierta');
+    await expect(service.crearActividad(actividad)).rejects.toHaveProperty("message",'La actividad debe de estar abierta');
   });
 
   it('should change the activity state to finalizada when the cupo is full', async () => {
@@ -154,7 +156,7 @@ describe('ActividadService', () => {
 
     await actividadRepository.save(actividad);
 
-    await expect(service.cambiarEstado(actividad.id, 1)).rejects.toThrow('No se puede cerrar la actividad. Debe tener al menos el 80% del cupo inscrito.');
+    await expect(service.cambiarEstado(actividad.id, 1)).rejects.toHaveProperty("message", 'No se puede cerrar la actividad. Debe tener al menos el 80% del cupo inscrito.');
   });
 
   it('should return an activity by date', async () => {
@@ -167,7 +169,7 @@ describe('ActividadService', () => {
 
   it('should throw an error if no activities are found for the given date', async () => {
     const fechaInvalida = '000-00-00T00:00:00.000Z';
-    await expect(service.findActividadesByFecha(fechaInvalida)).rejects.toThrow('No hay actividades con la fecha dada');
+    await expect(service.findActividadesByFecha(fechaInvalida)).rejects.toHaveProperty("message" ,'No hay actividades con la fecha dada');
   });
 
 });

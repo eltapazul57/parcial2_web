@@ -87,7 +87,7 @@ describe('EstudianteService', () => {
       actividades: [],
       resenas: []
     };
-    await expect(service.crearEstudiante(estudiante)).rejects.toThrowError('Semestre inválido.');
+    await expect(service.crearEstudiante(estudiante)).rejects.toHaveProperty("message", 'Semestre inválido.');
   });
 
   it('should throw an error when creating an estudiante with invalid correo', async () => {
@@ -101,7 +101,7 @@ describe('EstudianteService', () => {
       actividades: [],
       resenas: []
     };
-    await expect(service.crearEstudiante(estudiante)).rejects.toThrowError('Debe de incluir un correo valido');
+    await expect(service.crearEstudiante(estudiante)).rejects.toHaveProperty("message",'Debe de incluir un correo valido');
   });
 
   it('should return an estudiante by id', async () => {
@@ -117,7 +117,7 @@ describe('EstudianteService', () => {
   });
 
   it('should throw an error for an invalid estudiante id', async () => {
-    await expect(() => service.findEstudianteById('0')).rejects.toThrowError('Estudiante no encontrado');
+    await expect(() => service.findEstudianteById('0')).rejects.toHaveProperty("message",'Estudiante no encontrado');
   });
 
   it('should enroll an estudiante in an actividad', async () => {
@@ -151,7 +151,7 @@ describe('EstudianteService', () => {
     
     await expect(
       service.inscribirseActividad(estudiante.id, actividadCerrada.id)
-    ).rejects.toThrow('La actividad no está abierta para inscripciones');
+    ).rejects.toHaveProperty("message" ,'La actividad no está abierta para inscripciones');
   });
 
 

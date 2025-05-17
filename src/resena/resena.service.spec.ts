@@ -94,7 +94,7 @@ describe('ResenaService', () => {
       fecha: new Date().toISOString(),
     }); 
 
-    await expect(service.agregarResena(resena, estudiante.id, actividad.id)).rejects.toThrow('La actividad no está finalizada para reseñas');
+    await expect(service.agregarResena(resena, estudiante.id, actividad.id)).rejects.toHaveProperty("message", 'La actividad no está finalizada para reseñas');
   });
 });
 
