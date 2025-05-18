@@ -2,6 +2,7 @@
 	"info": {
 		"_postman_id": "49c5d835-ab5d-42be-8f78-f3a4e419bd56",
 		"name": "Estudiantes",
+		"description": "Se crearon cinco estudiantes válidos para llenar el cupo de una actividad y probar el cambio de estado. También se evaluaron casos con correo y semestre inválidos, y se intentó consultar un estudiante inexistente, verificando así el manejo adecuado de errores y restriccionesEndFragment",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
 		"_exporter_id": "29684470"
 	},
@@ -623,13 +624,13 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "{{baseUrl}}/estudiante/0",
+					"raw": "{{baseUrl}}/estudiante/00000000-0000-0000-0000-000000000000",
 					"host": [
 						"{{baseUrl}}"
 					],
 					"path": [
 						"estudiante",
-						"0"
+						"00000000-0000-0000-0000-000000000000"
 					]
 				}
 			},

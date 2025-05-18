@@ -2,6 +2,7 @@
 	"info": {
 		"_postman_id": "3cd19ba2-0ccd-42cf-a38d-d874e69d8618",
 		"name": "Actividades",
+		"description": "Se realizaron pruebas para verificar la creación de actividades, incluyendo un caso exitoso y otro que incumple las reglas de negocio (como un título demasiado corto o estado inválido), con el fin de validar tanto la funcionalidad como la generación de errores y códigos HTTP adecuados.EndFragment",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
 		"_exporter_id": "29684470"
 	},

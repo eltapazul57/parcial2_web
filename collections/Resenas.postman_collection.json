@@ -2,6 +2,7 @@
 	"info": {
 		"_postman_id": "e21cd7f2-b1a7-457e-8b9f-0677d8a1eed4",
 		"name": "Resenas",
+		"description": "Se probó la creación exitosa de una reseña cumpliendo todas las condiciones, y un caso fallido en el que la actividad no estaba finalizada, confirmando que el sistema rechaza correctamente la operación cuando no se cumplen las reglas de negocio.EndFragment",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
 		"_exporter_id": "29684470"
 	},
