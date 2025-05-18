@@ -8,9 +8,102 @@
 	"item": [
 		{
 			"name": "Buscar actividades por fecha",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var data = pm.response.json();\r",
+							"\r",
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Debe retornar una lista de actividades\", function () {\r",
+							"    pm.expect(data).to.be.an(\"array\");\r",
+							"    if (data.length > 0) {\r",
+							"        pm.expect(data[0]).to.have.property(\"fecha\");\r",
+							"        pm.expect(data[0]).to.have.property(\"titulo\");\r",
+							"    }\r",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
 			"request": {
 				"method": "GET",
-				"header": []
+				"header": [],
+				"url": {
+					"raw": "{{baseUrl}}/actividad/fecha/{{fecha_actividad}}",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"actividad",
+						"fecha",
+						"{{fecha_actividad}}"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Buscar actividades por fecha",
+					"originalRequest": {
+						"method": "GET",
+						"header": []
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "",
+					"header": [],
+					"cookie": [
+						{
+							"expires": "Invalid Date"
+						}
+					],
+					"body": "[\r\n  {\r\n    \"id\": \"ea5a...uuid\",\r\n    \"titulo\": \"Taller de React Avanzado\",\r\n    \"fecha\": \"2025-05-20\",\r\n    \"cupoMaximo\": 25,\r\n    \"estado\": 0,\r\n    \"resenas\": [],\r\n    \"estudiantes\": []\r\n  }\r\n]"
+				}
+			]
+		},
+		{
+			"name": "Buscar actividades con fecha erronea",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var data = pm.response.json();\r",
+							"\r",
+							"pm.test(\"Status code es 404 (NOT_FOUND)\", function () {\r",
+							"    pm.response.to.have.status(404);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Mensaje debe indicar que no hay actividades con la fecha dada\", function () {\r",
+							"    pm.expect(data.message).to.include(\"No hay actividades con la fecha dada\");\r",
+							"});\r",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{baseUrl}}/actividad/fecha/9999-01-01",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"actividad",
+						"fecha",
+						"9999-01-01"
+					]
+				}
 			},
 			"response": [
 				{
@@ -34,12 +127,47 @@
 		},
 		{
 			"name": "Crear actividad",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var data = pm.response.json();\r",
+							"pm.environment.set(\"actividad_id\", data.id); \r",
+							"\r",
+							"pm.environment.set(\"fecha_actividad\",  data.fecha);\r",
+							"\r",
+							"pm.test(\"Status code is 201\", function () {\r",
+							"    pm.response.to.have.status(201);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"La respuesta debe tener título y estado\", function () {\r",
+							"    pm.expect(data).to.have.property(\"titulo\");\r",
+							"    pm.expect(data).to.have.property(\"estado\");\r",
+							"});\r",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
 			"request": {
 				"method": "POST",
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n  \"titulo\": \"Ceramica nanomolecular\",\r\n  \"fecha\": \"2025-05-20\",\r\n  \"cupoMaximo\": 25,\r\n  \"estado\": 0\r\n}",
+					"raw": "{\r\n  \"titulo\": \"Ceramica nanomolecular 10\",\r\n  \"fecha\": \"2025-05-30\",\r\n  \"cupoMaximo\": 5,\r\n  \"estado\": 0\r\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -96,12 +224,34 @@
 		},
 		{
 			"name": "Cambiar estado de actividad",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var data = pm.response.json();\r",
+							"\r",
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"La respuesta debe tener el nuevo estado actualizado\", function () {\r",
+							"    pm.expect(data).to.have.property(\"estado\");\r",
+							"    pm.expect([1, 2]).to.include(data.estado);\r",
+							"});\r",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
 			"request": {
 				"method": "PUT",
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n  \"estado\": 1\r\n}\r\n",
+					"raw": "{\r\n  \"estado\": 2\r\n}\r\n",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -109,13 +259,13 @@
 					}
 				},
 				"url": {
-					"raw": "{{baseUrl}}/actividad/{{id}}/estado",
+					"raw": "{{baseUrl}}/actividad/{{actividad_id}}/estado",
 					"host": [
 						"{{baseUrl}}"
 					],
 					"path": [
 						"actividad",
-						"{{id}}",
+						"{{actividad_id}}",
 						"estado"
 					]
 				}
@@ -159,6 +309,99 @@
 					"body": "{\r\n  \"id\": \"ea5a...uuid\",\r\n  \"titulo\": \"Taller de React Avanzado\",\r\n  \"fecha\": \"2025-05-20\",\r\n  \"cupoMaximo\": 25,\r\n  \"estado\": 1,\r\n  \"resenas\": [],\r\n  \"estudiantes\": [ ... ]\r\n}"
 				}
 			]
+		},
+		{
+			"name": "Titulo corto en actividad",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var data = pm.response.json();\r",
+							"\r",
+							"pm.test(\"Status code es 400 (BAD_REQUEST)\", function () {\r",
+							"    pm.response.to.have.status(400);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"El mensaje de error debe indicar problema con el título\", function () {\r",
+							"    pm.expect(data.message).to.eql(\"El titulo debe de tener más de 15 caracteres\");\r",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"titulo\": \"M\",\r\n  \"fecha\": \"2025-05-20\",\r\n  \"cupoMaximo\": 20,\r\n  \"estado\": 0\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{baseUrl}}/actividad",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"actividad"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Crear actividad con estado erroneo",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var data = pm.response.json();\r",
+							"\r",
+							"pm.test(\"Status code es 412 (PRECONDITION_FAILED)\", function () {\r",
+							"    pm.response.to.have.status(412);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Mensaje debe indicar que la actividad debe estar abierta\", function () {\r",
+							"    pm.expect(data.message).to.include(\"La actividad debe de estar abierta\");\r",
+							"});\r",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"titulo\": \"Actividad de ceramica al aire libre\",\r\n  \"fecha\": \"2025-05-20\",\r\n  \"cupoMaximo\": 20,\r\n  \"estado\": 2\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{baseUrl}}/actividad",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"actividad"
+					]
+				}
+			},
+			"response": []
 		}
 	]
 }

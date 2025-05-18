@@ -8,12 +8,36 @@
 	"item": [
 		{
 			"name": "Crear resena",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var data = pm.response.json();\r",
+							"\r",
+							"pm.test(\"Status code is 201\", function () {\r",
+							"    pm.response.to.have.status(201);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"La reseña debe tener comentario, calificación y referencia al estudiante\", function () {\r",
+							"    pm.expect(data).to.have.property(\"comentario\");\r",
+							"    pm.expect(data).to.have.property(\"calificacion\");\r",
+							"    pm.expect(data.estudiante.id).to.eql(pm.environment.get(\"estudiante_id_1\"));\r",
+							"    pm.expect(data.actividad.id).to.eql(pm.environment.get(\"actividad_id\"));\r",
+							"});\r",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
 			"request": {
 				"method": "POST",
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n  \"comentario\": \"Excelente actividad, muy útil.\",\r\n  \"calificacion\": 5,\r\n  \"fecha\": \"2025-05-17\"\r\n}\r\n",
+					"raw": "{\r\n  \"comentario\": \"Excelente actividad, muy útil.\",\r\n  \"calificacion\": 5,\r\n  \"fecha\": \"2025-05-31\"\r\n}\r\n",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -21,15 +45,104 @@
 					}
 				},
 				"url": {
-					"raw": "{{baseUrl}}/resena/{{estudianteId}}/actividad/{{actividadId}}",
+					"raw": "{{baseUrl}}/resena/{{estudiante_id_1}}/actividad/{{actividad_id}}",
 					"host": [
 						"{{baseUrl}}"
 					],
 					"path": [
 						"resena",
-						"{{estudianteId}}",
+						"{{estudiante_id_1}}",
 						"actividad",
-						"{{actividadId}}"
+						"{{actividad_id}}"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Crear resena",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"comentario\": \"Excelente actividad, muy útil.\",\r\n  \"calificacion\": 5,\r\n  \"fecha\": \"2025-05-17\"\r\n}\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/resena/{{estudianteId}}/actividad/{{actividadId}}",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"resena",
+								"{{estudianteId}}",
+								"actividad",
+								"{{actividadId}}"
+							]
+						}
+					},
+					"status": "Created",
+					"code": 201,
+					"_postman_previewlanguage": "",
+					"header": [],
+					"cookie": [
+						{
+							"expires": "Invalid Date"
+						}
+					],
+					"body": ""
+				}
+			]
+		},
+		{
+			"name": "Crear resena erronea",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var data = pm.response.json();\r",
+							"\r",
+							"pm.test(\"Status code es 412 (PRECONDITION_FAILED)\", function () {\r",
+							"    pm.response.to.have.status(412);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Mensaje debe indicar que la actividad no está finalizada\", function () {\r",
+							"    pm.expect(data.message).to.include(\"La actividad no está finalizada para reseñas\");\r",
+							"});\r",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"comentario\": \"Quiero comentar pero la actividad aún no ha terminado\",\r\n  \"calificacion\": 4,\r\n  \"fecha\": \"2025-05-20\"\r\n}\r\n\r\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{baseUrl}}/resena/{{estudiante_id_1}}/actividad/{{actividad_id}}",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"resena",
+						"{{estudiante_id_1}}",
+						"actividad",
+						"{{actividad_id}}"
 					]
 				}
 			},

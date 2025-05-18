@@ -7,7 +7,7 @@
 	},
 	"item": [
 		{
-			"name": "Crear estudiante",
+			"name": "Crear estudiante 1",
 			"request": {
 				"method": "POST",
 				"header": [],
@@ -67,18 +67,504 @@
 			]
 		},
 		{
+			"name": "Crear estudiante 2",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var data = pm.response.json();\r",
+							"pm.environment.set(\"estudiante_id_2\", data.id);\r",
+							"\r",
+							"pm.test(\"Status code is 201\", function () {\r",
+							"    pm.response.to.have.status(201);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Debe contener un id\", function () {\r",
+							"    pm.expect(data).to.have.property(\"id\");\r",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"cedula\": 1234567890,\r\n  \"nombre\": \"Manuel Gomez 2\",\r\n  \"correo\": \"manuel@correo.com\",\r\n  \"programa\": \"Ingeniería de Sistemas\",\r\n  \"semestre\": 7\r\n}\r\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{baseUrl}}/estudiante",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"estudiante"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Crear estudiante",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"cedula\": 1234567890,\r\n  \"nombre\": \"Manuel Gomez\",\r\n  \"correo\": \"manuel@correo.com\",\r\n  \"programa\": \"Ingeniería de Sistemas\",\r\n  \"semestre\": 7\r\n}\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/estudiante",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"estudiante"
+							]
+						}
+					},
+					"_postman_previewlanguage": "",
+					"header": [],
+					"cookie": [
+						{
+							"expires": "Invalid Date"
+						}
+					],
+					"body": "{\r\n  \"id\": \"3f7e...uuid\",\r\n  \"cedula\": 1234567890,\r\n  \"nombre\": \"María González\",\r\n  \"correo\": \"maria@correo.com\",\r\n  \"programa\": \"Ingeniería de Sistemas\",\r\n  \"semestre\": 7,\r\n  \"actividades\": [],\r\n  \"resenas\": []\r\n}\r\n"
+				}
+			]
+		},
+		{
+			"name": "Crear estudiante 3",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var data = pm.response.json();\r",
+							"pm.environment.set(\"estudiante_id_3\", data.id);\r",
+							"\r",
+							"pm.test(\"Status code is 201\", function () {\r",
+							"    pm.response.to.have.status(201);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Debe contener un id\", function () {\r",
+							"    pm.expect(data).to.have.property(\"id\");\r",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"cedula\": 1234567890,\r\n  \"nombre\": \"Manuel Gomez 3\",\r\n  \"correo\": \"manuel@correo.com\",\r\n  \"programa\": \"Ingeniería de Sistemas\",\r\n  \"semestre\": 7\r\n}\r\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{baseUrl}}/estudiante",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"estudiante"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Crear estudiante",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"cedula\": 1234567890,\r\n  \"nombre\": \"Manuel Gomez\",\r\n  \"correo\": \"manuel@correo.com\",\r\n  \"programa\": \"Ingeniería de Sistemas\",\r\n  \"semestre\": 7\r\n}\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/estudiante",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"estudiante"
+							]
+						}
+					},
+					"_postman_previewlanguage": "",
+					"header": [],
+					"cookie": [
+						{
+							"expires": "Invalid Date"
+						}
+					],
+					"body": "{\r\n  \"id\": \"3f7e...uuid\",\r\n  \"cedula\": 1234567890,\r\n  \"nombre\": \"María González\",\r\n  \"correo\": \"maria@correo.com\",\r\n  \"programa\": \"Ingeniería de Sistemas\",\r\n  \"semestre\": 7,\r\n  \"actividades\": [],\r\n  \"resenas\": []\r\n}\r\n"
+				}
+			]
+		},
+		{
+			"name": "Crear estudiante 4",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var data = pm.response.json();\r",
+							"pm.environment.set(\"estudiante_id_4\", data.id);\r",
+							"\r",
+							"pm.test(\"Status code is 201\", function () {\r",
+							"    pm.response.to.have.status(201);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Debe contener un id\", function () {\r",
+							"    pm.expect(data).to.have.property(\"id\");\r",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"cedula\": 1234567890,\r\n  \"nombre\": \"Manuel Gomez 4\",\r\n  \"correo\": \"manuel@correo.com\",\r\n  \"programa\": \"Ingeniería de Sistemas\",\r\n  \"semestre\": 7\r\n}\r\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{baseUrl}}/estudiante",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"estudiante"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Crear estudiante",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"cedula\": 1234567890,\r\n  \"nombre\": \"Manuel Gomez\",\r\n  \"correo\": \"manuel@correo.com\",\r\n  \"programa\": \"Ingeniería de Sistemas\",\r\n  \"semestre\": 7\r\n}\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/estudiante",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"estudiante"
+							]
+						}
+					},
+					"_postman_previewlanguage": "",
+					"header": [],
+					"cookie": [
+						{
+							"expires": "Invalid Date"
+						}
+					],
+					"body": "{\r\n  \"id\": \"3f7e...uuid\",\r\n  \"cedula\": 1234567890,\r\n  \"nombre\": \"María González\",\r\n  \"correo\": \"maria@correo.com\",\r\n  \"programa\": \"Ingeniería de Sistemas\",\r\n  \"semestre\": 7,\r\n  \"actividades\": [],\r\n  \"resenas\": []\r\n}\r\n"
+				}
+			]
+		},
+		{
+			"name": "Crear estudiante 5",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var data = pm.response.json();\r",
+							"pm.environment.set(\"estudiante_id_5\", data.id);\r",
+							"\r",
+							"pm.test(\"Status code is 201\", function () {\r",
+							"    pm.response.to.have.status(201);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Debe contener un id\", function () {\r",
+							"    pm.expect(data).to.have.property(\"id\");\r",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"cedula\": 1234567890,\r\n  \"nombre\": \"Manuel Gomez 5\",\r\n  \"correo\": \"manuel@correo.com\",\r\n  \"programa\": \"Ingeniería de Sistemas\",\r\n  \"semestre\": 7\r\n}\r\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{baseUrl}}/estudiante",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"estudiante"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Crear estudiante",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"cedula\": 1234567890,\r\n  \"nombre\": \"Manuel Gomez\",\r\n  \"correo\": \"manuel@correo.com\",\r\n  \"programa\": \"Ingeniería de Sistemas\",\r\n  \"semestre\": 7\r\n}\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/estudiante",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"estudiante"
+							]
+						}
+					},
+					"_postman_previewlanguage": "",
+					"header": [],
+					"cookie": [
+						{
+							"expires": "Invalid Date"
+						}
+					],
+					"body": "{\r\n  \"id\": \"3f7e...uuid\",\r\n  \"cedula\": 1234567890,\r\n  \"nombre\": \"María González\",\r\n  \"correo\": \"maria@correo.com\",\r\n  \"programa\": \"Ingeniería de Sistemas\",\r\n  \"semestre\": 7,\r\n  \"actividades\": [],\r\n  \"resenas\": []\r\n}\r\n"
+				}
+			]
+		},
+		{
+			"name": "Crear estudiante con correo erroneo",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var data = pm.response.json();\r",
+							"\r",
+							"pm.test(\"Status code es 400 (BAD_REQUEST)\", function () {\r",
+							"    pm.response.to.have.status(400);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Mensaje debe indicar que el correo no es válido\", function () {\r",
+							"    pm.expect(data.message).to.include(\"Debe de incluir un correo valido\");\r",
+							"});\r",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"cedula\": 1234567890,\r\n  \"nombre\": \"Manuel Gomez 5\",\r\n  \"correo\": \"manuelcorreo.com\",\r\n  \"programa\": \"Ingeniería de Sistemas\",\r\n  \"semestre\": 7\r\n}\r\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{baseUrl}}/estudiante",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"estudiante"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Crear estudiante",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"cedula\": 1234567890,\r\n  \"nombre\": \"Manuel Gomez\",\r\n  \"correo\": \"manuel@correo.com\",\r\n  \"programa\": \"Ingeniería de Sistemas\",\r\n  \"semestre\": 7\r\n}\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/estudiante",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"estudiante"
+							]
+						}
+					},
+					"_postman_previewlanguage": "",
+					"header": [],
+					"cookie": [
+						{
+							"expires": "Invalid Date"
+						}
+					],
+					"body": "{\r\n  \"id\": \"3f7e...uuid\",\r\n  \"cedula\": 1234567890,\r\n  \"nombre\": \"María González\",\r\n  \"correo\": \"maria@correo.com\",\r\n  \"programa\": \"Ingeniería de Sistemas\",\r\n  \"semestre\": 7,\r\n  \"actividades\": [],\r\n  \"resenas\": []\r\n}\r\n"
+				}
+			]
+		},
+		{
+			"name": "Crear estudiante con semestre erroneo",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var data = pm.response.json();\r",
+							"\r",
+							"pm.test(\"Status code es 400 (BAD_REQUEST)\", function () {\r",
+							"    pm.response.to.have.status(400);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Mensaje debe indicar que el semestre es inválido\", function () {\r",
+							"    pm.expect(data.message).to.include(\"Semestre inválido\");\r",
+							"});\r",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"cedula\": 1234567890,\r\n  \"nombre\": \"Manuel Gomez 5\",\r\n  \"correo\": \"manuel@correo.com\",\r\n  \"programa\": \"Ingeniería de Sistemas\",\r\n  \"semestre\": 100\r\n}\r\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{baseUrl}}/estudiante",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"estudiante"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Crear estudiante",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"cedula\": 1234567890,\r\n  \"nombre\": \"Manuel Gomez\",\r\n  \"correo\": \"manuel@correo.com\",\r\n  \"programa\": \"Ingeniería de Sistemas\",\r\n  \"semestre\": 7\r\n}\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/estudiante",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"estudiante"
+							]
+						}
+					},
+					"_postman_previewlanguage": "",
+					"header": [],
+					"cookie": [
+						{
+							"expires": "Invalid Date"
+						}
+					],
+					"body": "{\r\n  \"id\": \"3f7e...uuid\",\r\n  \"cedula\": 1234567890,\r\n  \"nombre\": \"María González\",\r\n  \"correo\": \"maria@correo.com\",\r\n  \"programa\": \"Ingeniería de Sistemas\",\r\n  \"semestre\": 7,\r\n  \"actividades\": [],\r\n  \"resenas\": []\r\n}\r\n"
+				}
+			]
+		},
+		{
 			"name": "Buscar estudiante",
 			"request": {
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "{{baseUrl}}/estudiante/{{id}}",
+					"raw": "{{baseUrl}}/estudiante/{{estudiante_id_1}}",
 					"host": [
 						"{{baseUrl}}"
 					],
 					"path": [
 						"estudiante",
-						"{{id}}"
+						"{{estudiante_id_1}}"
 					]
 				}
 			},
@@ -111,20 +597,471 @@
 			]
 		},
 		{
-			"name": "Inscribir estudiante en actividad",
+			"name": "Buscar estudiante id erroneo",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var data = pm.response.json();\r",
+							"\r",
+							"pm.test(\"Status code es 404 (NOT_FOUND)\", function () {\r",
+							"    pm.response.to.have.status(404);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Mensaje debe indicar que el estudiante no fue encontrado\", function () {\r",
+							"    pm.expect(data.message).to.eql(\"Estudiante no encontrado\");\r",
+							"});\r",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
 			"request": {
-				"method": "POST",
+				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "{{baseUrl}}/estudiante/{{estudianteId}}/inscribirse/{{actividadId}}",
+					"raw": "{{baseUrl}}/estudiante/0",
 					"host": [
 						"{{baseUrl}}"
 					],
 					"path": [
 						"estudiante",
-						"{{estudianteId}}",
+						"0"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Buscar estudiante",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/estudiante/{{id}}",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"estudiante",
+								"{{id}}"
+							]
+						}
+					},
+					"_postman_previewlanguage": "",
+					"header": [],
+					"cookie": [
+						{
+							"expires": "Invalid Date"
+						}
+					],
+					"body": "{\r\n  \"id\": \"12345\",\r\n  \"cedula\": 1234567890,\r\n  \"nombre\": \"Manuel Gomez\",\r\n  \"correo\": \"manuel@correo.com\",\r\n  \"programa\": \"Ingeniería de Sistemas\",\r\n  \"semestre\": 7,\r\n  \"actividades\": [],\r\n  \"resenas\": []\r\n}\r\n"
+				}
+			]
+		},
+		{
+			"name": "Inscribir estudiante 1 en actividad",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var data = pm.response.json();\r",
+							"\r",
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"La respuesta debe incluir la actividad inscrita\", function () {\r",
+							"    pm.expect(data).to.have.property(\"actividades\");\r",
+							"    const actividadInscrita = data.actividades.some(a => a.id === pm.environment.get(\"actividad_id\"));\r",
+							"    pm.expect(actividadInscrita).to.be.true;\r",
+							"});\r",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"url": {
+					"raw": "{{baseUrl}}/estudiante/{{estudiante_id_1}}/inscribirse/{{actividad_id}}",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"estudiante",
+						"{{estudiante_id_1}}",
 						"inscribirse",
-						"{{actividadId}}"
+						"{{actividad_id}}"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Inscribir estudiante en actividad",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/estudiante/{{estudianteId}}/inscribirse/{{actividadId}}",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"estudiante",
+								"{{estudianteId}}",
+								"inscribirse",
+								"{{actividadId}}"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "",
+					"header": [],
+					"cookie": [
+						{
+							"expires": "Invalid Date"
+						}
+					],
+					"body": ""
+				}
+			]
+		},
+		{
+			"name": "Inscribir estudiante 2 en actividad",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var data = pm.response.json();\r",
+							"\r",
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"La respuesta debe incluir la actividad inscrita\", function () {\r",
+							"    pm.expect(data).to.have.property(\"actividades\");\r",
+							"    const actividadInscrita = data.actividades.some(a => a.id === pm.environment.get(\"actividad_id\"));\r",
+							"    pm.expect(actividadInscrita).to.be.true;\r",
+							"});\r",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"url": {
+					"raw": "{{baseUrl}}/estudiante/{{estudiante_id_2}}/inscribirse/{{actividad_id}}",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"estudiante",
+						"{{estudiante_id_2}}",
+						"inscribirse",
+						"{{actividad_id}}"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Inscribir estudiante en actividad",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/estudiante/{{estudianteId}}/inscribirse/{{actividadId}}",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"estudiante",
+								"{{estudianteId}}",
+								"inscribirse",
+								"{{actividadId}}"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "",
+					"header": [],
+					"cookie": [
+						{
+							"expires": "Invalid Date"
+						}
+					],
+					"body": ""
+				}
+			]
+		},
+		{
+			"name": "Inscribir estudiante 3 en actividad",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var data = pm.response.json();\r",
+							"\r",
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"La respuesta debe incluir la actividad inscrita\", function () {\r",
+							"    pm.expect(data).to.have.property(\"actividades\");\r",
+							"    const actividadInscrita = data.actividades.some(a => a.id === pm.environment.get(\"actividad_id\"));\r",
+							"    pm.expect(actividadInscrita).to.be.true;\r",
+							"});\r",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"url": {
+					"raw": "{{baseUrl}}/estudiante/{{estudiante_id_3}}/inscribirse/{{actividad_id}}",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"estudiante",
+						"{{estudiante_id_3}}",
+						"inscribirse",
+						"{{actividad_id}}"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Inscribir estudiante en actividad",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/estudiante/{{estudianteId}}/inscribirse/{{actividadId}}",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"estudiante",
+								"{{estudianteId}}",
+								"inscribirse",
+								"{{actividadId}}"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "",
+					"header": [],
+					"cookie": [
+						{
+							"expires": "Invalid Date"
+						}
+					],
+					"body": ""
+				}
+			]
+		},
+		{
+			"name": "Inscribir estudiante 4 en actividad",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var data = pm.response.json();\r",
+							"\r",
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"La respuesta debe incluir la actividad inscrita\", function () {\r",
+							"    pm.expect(data).to.have.property(\"actividades\");\r",
+							"    const actividadInscrita = data.actividades.some(a => a.id === pm.environment.get(\"actividad_id\"));\r",
+							"    pm.expect(actividadInscrita).to.be.true;\r",
+							"});\r",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"url": {
+					"raw": "{{baseUrl}}/estudiante/{{estudiante_id_4}}/inscribirse/{{actividad_id}}",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"estudiante",
+						"{{estudiante_id_4}}",
+						"inscribirse",
+						"{{actividad_id}}"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Inscribir estudiante en actividad",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/estudiante/{{estudianteId}}/inscribirse/{{actividadId}}",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"estudiante",
+								"{{estudianteId}}",
+								"inscribirse",
+								"{{actividadId}}"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "",
+					"header": [],
+					"cookie": [
+						{
+							"expires": "Invalid Date"
+						}
+					],
+					"body": ""
+				}
+			]
+		},
+		{
+			"name": "Inscribir estudiante 5 en actividad",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var data = pm.response.json();\r",
+							"\r",
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"La respuesta debe incluir la actividad inscrita\", function () {\r",
+							"    pm.expect(data).to.have.property(\"actividades\");\r",
+							"    const actividadInscrita = data.actividades.some(a => a.id === pm.environment.get(\"actividad_id\"));\r",
+							"    pm.expect(actividadInscrita).to.be.true;\r",
+							"});\r",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"url": {
+					"raw": "{{baseUrl}}/estudiante/{{estudiante_id_5}}/inscribirse/{{actividad_id}}",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"estudiante",
+						"{{estudiante_id_5}}",
+						"inscribirse",
+						"{{actividad_id}}"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Inscribir estudiante en actividad",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/estudiante/{{estudianteId}}/inscribirse/{{actividadId}}",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"estudiante",
+								"{{estudianteId}}",
+								"inscribirse",
+								"{{actividadId}}"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "",
+					"header": [],
+					"cookie": [
+						{
+							"expires": "Invalid Date"
+						}
+					],
+					"body": ""
+				}
+			]
+		},
+		{
+			"name": "Inscribir estudiante 1 en actividad no exisxstente",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var data = pm.response.json();\r",
+							"\r",
+							"pm.test(\"Status code es 404 (NOT_FOUND)\", function () {\r",
+							"    pm.response.to.have.status(404);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Mensaje debe indicar que la actividad no fue encontrada\", function () {\r",
+							"    pm.expect(data.message).to.include(\"Actividad no encontrada\");\r",
+							"});\r",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"url": {
+					"raw": "{{baseUrl}}/estudiante/{{estudiante_id_1}}/inscribirse/00000000-0000-0000-0000-000000000000",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"estudiante",
+						"{{estudiante_id_1}}",
+						"inscribirse",
+						"00000000-0000-0000-0000-000000000000"
 					]
 				}
 			},
