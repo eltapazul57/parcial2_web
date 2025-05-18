@@ -1,6 +1,5 @@
 /* eslint-disable prettier/prettier */
-/* eslint-disable @typescript-eslint/no-unsafe-assignment */
-/* eslint-disable @typescript-eslint/no-unsafe-call */
+
 
 import { Body, Controller, Get, Param, Post, Put } from '@nestjs/common';
 import { plainToInstance } from 'class-transformer';
