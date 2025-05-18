@@ -12,8 +12,8 @@ import { ResenaModule } from './resena/resena.module';
 import { ResenaEntity } from './resena/resena.entity';
 import { ActividadEntity } from './actividad/actividad.entity';
 import { EstudianteEntity } from './estudiante/estudiante.entity';
-
-
+import { BusinessErrorsInterceptor } from './shared/interceptors/business-errors.interceptor';
+import { APP_INTERCEPTOR } from '@nestjs/core';
 @Module({
   imports: [EstudianteModule, ActividadModule, ResenaModule,
     TypeOrmModule.forRoot({
@@ -31,6 +31,6 @@ import { EstudianteEntity } from './estudiante/estudiante.entity';
  ],
   
   controllers: [AppController],
-  providers: [AppService],
+  providers: [AppService ,{provide:APP_INTERCEPTOR, useClass: BusinessErrorsInterceptor,},],
 })
 export class AppModule {}
